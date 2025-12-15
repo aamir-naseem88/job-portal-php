@@ -1,32 +1,50 @@
 <?php
 require '../config/database.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$error = '';
+$success = '';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];
     $role = $_POST['role'];
 
-    // Hash password
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    // Basic validation
+    if (empty($name) || empty($email) || empty($password) || empty($role)) {
+        $error = "All fields are required.";
+    } 
+    // Check if email already exists
+    else {
+        $check = $pdo->prepare("SELECT user_id FROM users WHERE email = :email");
+        $check->execute([':email' => $email]);
 
-    // Insert user
-    $stmt = $pdo->prepare("
-        INSERT INTO users (name, email, password, role)
-        VALUES (:name, :email, :password, :role)
-    ");
+        if ($check->rowCount() > 0) {
+            $error = "Email already registered.";
+        } else {
+            // Hash password
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt->execute([
-        ':name' => $name,
-        ':email' => $email,
-        ':password' => $hashedPassword,
-        ':role' => $role
-    ]);
+            // Insert user
+            $stmt = $pdo->prepare("
+                INSERT INTO users (name, email, password, role)
+                VALUES (:name, :email, :password, :role)
+            ");
 
-    echo "Registration successful";
+            $stmt->execute([
+                ':name' => $name,
+                ':email' => $email,
+                ':password' => $hashedPassword,
+                ':role' => $role
+            ]);
+
+            $success = "Registration successful. You can login now.";
+        }
+    }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -34,6 +52,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Register</title>
 </head>
 <body>
+
+<?php if ($error): ?>
+    <p style="color:red;"><?php echo $error; ?></p>
+<?php endif; ?>
+
+<?php if ($success): ?>
+    <p style="color:green;"><?php echo $success; ?></p>
+<?php endif; ?>
 
 <h2>User Registration</h2>
 
