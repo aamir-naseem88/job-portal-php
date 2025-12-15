@@ -1,4 +1,5 @@
 <?php
+include '../includes/header.php';
 require '../includes/auth.php';
 checkRole('employer');
 require '../config/database.php';
@@ -21,3 +22,4 @@ $company = $stmt->fetch(PDO::FETCH_ASSOC);
 
 <br><br>
 <a href="../auth/logout.php">Logout</a>
+<?php include '../includes/footer.php'; ?>

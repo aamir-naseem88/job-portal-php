@@ -1,4 +1,5 @@
 <?php
+include '../includes/header.php';
 session_start();
 require '../config/database.php';
 
@@ -59,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <input type="password" name="password" placeholder="Password" required><br><br>
     <button type="submit">Login</button>
 </form>
+<?php include '../includes/footer.php'; ?>
 
 </body>
 </html>

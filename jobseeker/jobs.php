@@ -1,4 +1,5 @@
 <?php
+include '../includes/header.php';
 require '../includes/auth.php';
 checkRole('jobseeker');
 require '../config/database.php';
@@ -40,6 +41,8 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <br>
 <a href="dashboard.php">Back to Dashboard</a> | <a href="../auth/logout.php">Logout</a>
+<br>
+<?php include '../includes/footer.php'; ?>
 
 </body>
 </html>

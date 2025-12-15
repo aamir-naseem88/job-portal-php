@@ -1,4 +1,5 @@
 <?php
+include '../includes/header.php';
 require '../config/database.php';
 
 $error = '';
@@ -76,6 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <button type="submit">Register</button>
 </form>
-
+<?php include '../includes/footer.php';?>
 </body>
 </html>

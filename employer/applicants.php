@@ -1,4 +1,5 @@
 <?php
+include '../includes/header.php';
 require '../includes/auth.php';
 checkRole('employer');
 require '../config/database.php';
@@ -56,5 +57,7 @@ $applicants = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php endif; ?>
 
 <br><a href="dashboard.php">Back to Dashboard</a>
+
+<?php include '../includes/footer.php'; ?>
 </body>
 </html>

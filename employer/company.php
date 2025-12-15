@@ -1,4 +1,5 @@
 <?php
+include '../includes/header.php';
 require '../includes/auth.php';
 checkRole('employer');
 require '../config/database.php';
@@ -68,6 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <br>
 <a href="dashboard.php">Back to Dashboard</a>
-
+<?php include '../includes/footer.php'; ?>
 </body>
 </html>

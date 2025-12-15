@@ -1,0 +1,36 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+    color: #2c3e50;
+}
+
+a {
+    text-decoration: none;
+}
+
+.card {
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background-color: #1abc9c;
+    border-color: #1abc9c;
+}
+
+.btn-secondary {
+    background-color: #34495e;
+    border-color: #34495e;
+}
+
+.text-error {
+    color: #e74c3c;
+}
+
+.text-success {
+    color: #27ae60;
+}
+
+input, textarea, select {
+    border-radius: 0.3rem;
+}

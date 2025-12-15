@@ -1,4 +1,5 @@
 <?php
+include '../includes/header.php';
 require '../includes/auth.php';
 checkRole('jobseeker');
 require '../config/database.php';
@@ -82,6 +83,8 @@ if (isset($_FILES['cv_file']) && $_FILES['cv_file']['error'] === 0) {
     <?php endif; ?>
 
 <?php endif; ?>
+
+<?php include '../includes/footer.php'; ?>
 
 </body>
 </html>
