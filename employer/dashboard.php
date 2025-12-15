@@ -1,3 +1,5 @@
 <?php
-session_start();
+require '../includes/auth.php';
+checkRole('employer');
+
 echo "Employer Dashboard";
