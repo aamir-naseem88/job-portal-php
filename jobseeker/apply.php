@@ -39,6 +39,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !$error) {
 
     $success = "You have successfully applied for this job.";
 }
+
+if (isset($_FILES['cv_file']) && $_FILES['cv_file']['error'] === 0) {
+    $ext = pathinfo($_FILES['cv_file']['name'], PATHINFO_EXTENSION);
+    $allowed = ['pdf'];
+    if (in_array(strtolower($ext), $allowed)) {
+        $newName = uniqid() . '.' . $ext;
+        $dest = '../assets/uploads/' . $newName;
+        move_uploaded_file($_FILES['cv_file']['tmp_name'], $dest);
+        $cv_file = $newName;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -59,10 +71,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !$error) {
         <p style="color:green;"><?php echo $success; ?></p>
         <a href="jobs.php">Back to Jobs</a>
     <?php else: ?>
-        <form method="POST">
-            <p>Are you sure you want to apply?</p>
-            <button type="submit">Apply</button>
-        </form>
+        <form method="POST" enctype="multipart/form-data">
+    <p>Upload your CV (PDF, optional):</p>
+    <input type="file" name="cv_file" accept=".pdf"><br><br>
+    <button type="submit">Apply</button>
+</form>
+
         <br>
         <a href="jobs.php">Cancel</a>
     <?php endif; ?>
